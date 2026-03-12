@@ -1,0 +1,11 @@
+id = "infracost"
+name = "Infracost"
+version = "0.0.1"
+schema_version = 1
+authors = ["Infracost <hello@infracost.io>"]
+description = "Cloud cost estimates and FinOps policies for Terraform"
+repository = "https://github.com/infracost/zed-infracost"
+
+[language_servers.infracost-ls]
+name = "Infracost"
+languages = ["Terraform"]
