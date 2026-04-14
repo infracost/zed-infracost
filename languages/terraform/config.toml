@@ -1,3 +1,0 @@
-name = "Terraform"
-path_suffixes = ["tf"]
-line_comments = ["# "]
