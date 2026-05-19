@@ -27,7 +27,7 @@ impl InfracostExtension {
         );
 
         let release = zed::latest_github_release(
-            "infracost/infracost-ls",
+            "infracost/lsp",
             zed::GithubReleaseOptions {
                 require_assets: true,
                 pre_release: false,
@@ -48,7 +48,7 @@ impl InfracostExtension {
         };
 
         let version = &release.version;
-        let asset_name = format!("infracost-ls_{version}_{os}_{arch}.tar.gz");
+        let asset_name = format!("lsp_{os}_{arch}.tar.gz");
         let asset = release
             .assets
             .iter()
