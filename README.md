@@ -21,6 +21,22 @@ A [Zed](https://zed.dev) extension that provides cloud cost estimates and FinOps
 
 The extension automatically downloads the [Infracost language server](https://github.com/infracost/infracost-ls) on first use. If `infracost-ls` is already on your PATH, it will use that instead.
 
+## Bicep
+
+Bicep cost estimates are off by default, because estimating a Bicep file compiles it — which requires the [Bicep CLI](https://aka.ms/bicep-install) on your `PATH` and downloads any modules the file references from their registries.
+
+Unlike the other editor integrations, this extension has no `enableBicep` setting. Enable it by exporting the environment variable in the environment Zed is launched from:
+
+```sh
+export INFRACOST_ENABLE_BICEP=true
+```
+
+This is deliberate. The toggle must be user-level only: a repository must not be able to make Infracost run a compiler over its own contents. Zed's [project settings](https://zed.dev/docs/configuring-zed) (`.zed/settings.json`) merge over user settings and are part of the checked-out repository, and Zed has no workspace-trust equivalent to fall back on — so an extension setting read through `LspSettings::for_worktree` would be repo-controlled. The language server treats an absent `enableBicep` as "use the ambient environment", so omitting it leaves the decision with the environment you started Zed in.
+
+Note that Zed also needs a Bicep language extension installed for `.bicep` files to be routed to any language server.
+
+ARM JSON is estimated either way, including JSON that a Bicep build produced.
+
 ## Requirements
 
 - [Zed](https://zed.dev) editor
